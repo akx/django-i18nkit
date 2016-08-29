@@ -59,3 +59,21 @@ def raise_if_no_module(module):
         import_module(module)
     except ImportError:
         raise ImproperlyConfigured("`%s` is required for this functionality" % module)
+
+
+class DirectoryFilter(object):
+    def __init__(self, ignore_dirs=(), default_ignore_dirs=True):
+        self.ignore_dirs = ignore_dirs
+        self.default_ignore_dirs = default_ignore_dirs
+
+    def matches(self, path):
+        basename = os.path.basename(path)
+        if basename[0] in {'.', '_'}:
+            return False
+        if self.default_ignore_dirs:
+            if basename in {'bower_components', 'node_modules', 'tests', 'htmlcov'}:
+                return False
+        return (basename not in self.ignore_dirs)
+
+    def __call__(self, path):
+        return self.matches(path)

@@ -5,7 +5,7 @@ from django.core.management import BaseCommand
 from babel.messages import Catalog
 from babel.messages.extract import check_and_call_extract_file, DEFAULT_KEYWORDS
 from babel.messages.pofile import write_po
-from i18nkit.utils import get_paths
+from i18nkit.utils import get_paths, DirectoryFilter
 
 METHOD_MAP = [
     ('**.js', 'javascript'),
@@ -69,6 +69,10 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         self.config = options
+        self.dirname_filter = DirectoryFilter(
+            ignore_dirs=options['ignore_dirs'],
+            default_ignore_dirs=options['default_ignore_dirs'],
+        )
         paths = get_paths(
             apps=self.config['apps'],
             dirs=self.config['dirs'],
@@ -115,15 +119,6 @@ class Command(BaseCommand):
 
                 catalog.add(message, None, [(filepath, lineno)], auto_comments=comments, context=context)
         return catalog
-
-    def dirname_filter(self, path):
-        basename = os.path.basename(path)
-        if basename[0] in {'.', '_'}:
-            return False
-        if self.config['default_ignore_dirs']:
-            if basename in {'bower_components', 'node_modules', 'tests', 'htmlcov'}:
-                return False
-        return (basename not in self.config['ignore_dirs'])
 
     def status_callback(self, filename, method, options):
         if self.config['verbosity'] > 2:
