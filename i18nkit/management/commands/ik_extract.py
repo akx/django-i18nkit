@@ -5,7 +5,7 @@ from django.core.management import BaseCommand
 from babel.messages import Catalog
 from babel.messages.extract import check_and_call_extract_file, DEFAULT_KEYWORDS
 from babel.messages.pofile import write_po
-from i18nkit.utils import get_paths, DirectoryFilter
+from i18nkit.utils import get_paths, DirectoryFilter, add_paths_options
 
 METHOD_MAP = [
     ('**.js', 'javascript'),
@@ -52,20 +52,10 @@ class Command(BaseCommand):
         :type parser: argparse.ArgumentParser
         """
         parser.add_argument('-o', '--output')
-        parser.add_argument('--all-apps', action='store_true')
-        parser.add_argument('-a', '--app', action='append', dest='apps', default=[])
-        parser.add_argument('-d', '--dir', action='append', dest='dirs', default=[])
-        parser.add_argument(
-            '--dir-children',
-            action='append',
-            dest='dir_children',
-            help='add immediate directory children of this directory as dirs',
-            default=[]
-        )
-        parser.add_argument('-I', '--ignore-dir', action='append', dest='ignore_dirs', default=[])
+        add_paths_options(parser)
+        DirectoryFilter.add_options(parser)
         parser.add_argument('-H', '--omit-header', action='store_true')
         parser.add_argument('-z', '--zero-lineno', action='store_true')
-        parser.add_argument('--no-default-ignore-dirs', dest='default_ignore_dirs', action='store_false', default=True)
 
     def handle(self, **options):
         self.config = options

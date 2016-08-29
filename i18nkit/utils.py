@@ -54,6 +54,19 @@ def get_paths(apps=(), dirs=(), dir_children=(), all_apps=False, dirname_filter=
     return paths
 
 
+def add_paths_options(parser):
+    parser.add_argument('--all-apps', action='store_true')
+    parser.add_argument('-a', '--app', action='append', dest='apps', default=[])
+    parser.add_argument('-d', '--dir', action='append', dest='dirs', default=[])
+    parser.add_argument(
+        '--dir-children',
+        action='append',
+        dest='dir_children',
+        help='add immediate directory children of this directory as dirs',
+        default=[]
+    )
+
+
 def raise_if_no_module(module):
     try:
         import_module(module)
@@ -77,3 +90,8 @@ class DirectoryFilter(object):
 
     def __call__(self, path):
         return self.matches(path)
+
+    @classmethod
+    def add_options(cls, parser):
+        parser.add_argument('-I', '--ignore-dir', action='append', dest='ignore_dirs', default=[])
+        parser.add_argument('--no-default-ignore-dirs', dest='default_ignore_dirs', action='store_false', default=True)
