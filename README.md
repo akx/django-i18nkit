@@ -29,3 +29,7 @@ Extracts translatables from Python, Django HTML and Jinja with sane defaults.
 ### `ik_import`
 
 Imports non-gettext internationalization data to .po files. The inverse of `ik_export`.
+
+### `ik_compile`
+
+Compiles all `.po` files to `.mo` files.
