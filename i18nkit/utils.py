@@ -1,11 +1,10 @@
 import os
 from importlib import import_module
 
-from django.apps import apps as app_registry
-from django.core.exceptions import ImproperlyConfigured
-
 from babel.messages import Catalog
 from babel.messages.pofile import read_po
+from django.apps import apps as app_registry
+from django.core.exceptions import ImproperlyConfigured
 
 
 def merge_catalogs(catalogs):

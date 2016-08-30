@@ -6,7 +6,7 @@ from babel.messages.pofile import read_po
 from django.core.management import BaseCommand
 from django.utils.six import BytesIO
 
-from i18nkit.utils import get_paths, DirectoryFilter, add_paths_options
+from i18nkit.utils import add_paths_options, DirectoryFilter, get_paths
 
 
 class Command(BaseCommand):
