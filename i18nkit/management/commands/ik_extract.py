@@ -1,11 +1,11 @@
 import os
 
-from django.core.management import BaseCommand
-
 from babel.messages import Catalog
 from babel.messages.extract import check_and_call_extract_file, DEFAULT_KEYWORDS
 from babel.messages.pofile import write_po
-from i18nkit.utils import get_paths, DirectoryFilter, add_paths_options
+from django.core.management import BaseCommand
+
+from i18nkit.utils import add_paths_options, DirectoryFilter, get_paths
 
 METHOD_MAP = [
     ('**.js', 'javascript'),

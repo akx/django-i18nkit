@@ -1,9 +1,9 @@
 import os
 
+from babel.messages.pofile import read_po, write_po
 from django.conf import settings
 from django.core.management import BaseCommand
 
-from babel.messages.pofile import read_po, write_po
 from i18nkit.excel import read_catalog_workbook
 from i18nkit.utils import merge_catalogs
 

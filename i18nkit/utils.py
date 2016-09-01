@@ -1,14 +1,21 @@
 import os
 from importlib import import_module
 
+from babel.messages import Catalog
+from babel.messages.pofile import read_po
 from django.apps import apps as app_registry
 from django.core.exceptions import ImproperlyConfigured
 
-from babel.messages import Catalog
-from babel.messages.pofile import read_po
-
 
 def merge_catalogs(catalogs):
+    """
+    Merge the given Catalogs, ruthlessly replacing (not augmenting) content.
+
+    :param catalogs: List of catalogs
+    :type catalogs: Iterable[babel.messages.Catalog]
+    :return: New catalog
+    :rtype: babel.messages.Catalog
+    """
     merged_catalog = None
     for catalog in catalogs:
         if catalog is None:
@@ -20,6 +27,9 @@ def merge_catalogs(catalogs):
             )
         assert catalog.charset == merged_catalog.charset
         for msg in catalog:
+            if not msg.id:
+                continue
+            merged_catalog.delete(msg.id)
             merged_catalog[msg.id] = msg
     return merged_catalog
 
