@@ -1,1 +1,4 @@
 {% trans %}Hejsan, värld!{% endtrans %}
+
+{# this will break the fallback configuration, as the `break` tag isn't available #}
+{% for x in [] %}{% break %}{% endfor %}

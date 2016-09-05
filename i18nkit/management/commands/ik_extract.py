@@ -5,13 +5,14 @@ from babel.messages.extract import check_and_call_extract_file, DEFAULT_KEYWORDS
 from babel.messages.pofile import write_po
 from django.core.management import BaseCommand
 
+from i18nkit.jinja2_extract import jinja2_extract
 from i18nkit.utils import add_paths_options, DirectoryFilter, get_paths
 
 METHOD_MAP = [
     ('**.js', 'javascript'),
     ('**.py', 'python'),
     ('**/templates/**.html', 'django'),
-    ('**/templates/**.jinja', 'jinja2'),
+    ('**/templates/**.jinja', jinja2_extract),
 ]
 
 OPTIONS_MAP = {
