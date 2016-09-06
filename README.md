@@ -33,3 +33,14 @@ Imports non-gettext internationalization data to .po files. The inverse of `ik_e
 ### `ik_compile`
 
 Compiles all `.po` files to `.mo` files.
+
+Django Settings
+---------------
+
+### `I18NKIT_POISON`
+
+(Boolean) Whether to globally enable i18n poisoning.
+
+Note that this is only read during application initialization.
+
+Be extra sure to have this disabled when creating migrations! :D
