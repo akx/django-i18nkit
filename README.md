@@ -5,6 +5,13 @@ Some utilities to make Django internationalization a little easier.
 
 :exclamation: Work in progress.
 
+Features
+--------
+
+* Sane Python/Django-HTML/Jinja2 message extraction
+* Bidirectional Excel/gettext conversion, for those enterprise customers
+* I18n poisoning, to make it easy to spot untranslated strings
+
 Usage
 -----
 
