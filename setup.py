@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='django-i18nkit',
-    version='0.0.3',
+    version='0.0.4',
     author='Aarni Koskela',
     author_email='akx@iki.fi',
     description='Internationalization utilities for Django.',
