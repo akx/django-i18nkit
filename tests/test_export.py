@@ -1,6 +1,6 @@
+import openpyxl
 from django.core.management import call_command
 
-import openpyxl
 from tests.utils import repo_root
 
 

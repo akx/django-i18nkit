@@ -2,7 +2,7 @@ from warnings import warn
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from jinja2.ext import _CommentFinder, extract_from_ast, babel_extract
+from jinja2.ext import _CommentFinder, babel_extract, extract_from_ast
 
 
 def django_jinja2_extract(fileobj, keywords, comment_tags, options):
