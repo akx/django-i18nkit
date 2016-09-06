@@ -1,6 +1,5 @@
 import os
 
-from babel.messages import Catalog
 from babel.messages.mofile import write_mo
 from babel.messages.pofile import read_po
 from django.core.management import BaseCommand
@@ -50,7 +49,7 @@ class Command(BaseCommand):
             write_mo(out_bio, catalog)
             with open(outfile, 'wb') as outfp:
                 outfp.write(out_bio.getvalue())
-        except Exception as exc:
+        except Exception as exc:  # pragma: no cover
             self.stderr.write('could not process %s: %s' % (file, exc))
         else:
             self.stdout.write('compiled %s -> %s' % (file, outfile))

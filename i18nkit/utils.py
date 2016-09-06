@@ -80,7 +80,7 @@ def add_paths_options(parser):
 def raise_if_no_module(module):
     try:
         import_module(module)
-    except ImportError:
+    except ImportError:  # pragma: no cover
         raise ImproperlyConfigured("`%s` is required for this functionality" % module)
 
 

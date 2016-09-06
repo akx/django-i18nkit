@@ -1,13 +1,12 @@
 from babel.messages import Catalog
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
 from django.utils import translation
 
 from i18nkit.utils import raise_if_no_module
 
 try:
     import openpyxl
-except ImportError:
+except ImportError:  # pragma: no cover
     openpyxl = None
 
 
@@ -53,10 +52,10 @@ def read_catalog_workbook(infp, source_locale=None):
             else:
                 texts = dict(zip(languages, texts))
                 for language, text in texts.items():
-                    if not text:
+                    if not text:  # pragma: no cover
                         continue
                     strip_text = text.strip()
-                    if not strip_text:
+                    if not strip_text:  # pragma: no cover
                         continue
                     catalogs[language].add(texts[source_locale], text)
     return catalogs

@@ -5,6 +5,13 @@ Some utilities to make Django internationalization a little easier.
 
 :exclamation: Work in progress.
 
+Features
+--------
+
+* Sane Python/Django-HTML/Jinja2 message extraction
+* Bidirectional Excel/gettext conversion, for those enterprise customers
+* I18n poisoning, to make it easy to spot untranslated strings
+
 Usage
 -----
 
@@ -33,3 +40,14 @@ Imports non-gettext internationalization data to .po files. The inverse of `ik_e
 ### `ik_compile`
 
 Compiles all `.po` files to `.mo` files.
+
+Django Settings
+---------------
+
+### `I18NKIT_POISON`
+
+(Boolean) Whether to globally enable i18n poisoning.
+
+Note that this is only read during application initialization.
+
+Be extra sure to have this disabled when creating migrations! :D
