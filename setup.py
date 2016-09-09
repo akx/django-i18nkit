@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='django-i18nkit',
-    version='0.0.4',
+    version='0.0.5',
     author='Aarni Koskela',
     author_email='akx@iki.fi',
     description='Internationalization utilities for Django.',
@@ -25,7 +25,6 @@ setup(
         'babel.extractors': [
             'ik_django = i18nkit.django_extract:django_extract',
             'ik_jinja2 = i18nkit.jinja2_extract:jinja2_extract',
-
-        ]
-    }
+        ],
+    },
 )
