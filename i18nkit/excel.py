@@ -1,3 +1,5 @@
+import logging
+
 from babel.messages import Catalog
 from django.conf import settings
 from django.utils import translation
@@ -8,6 +10,8 @@ try:
     import openpyxl
 except ImportError:  # pragma: no cover
     openpyxl = None
+
+log = logging.getLogger(__name__)
 
 
 def write_catalog_workbook(outfp, catalog, languages=None, source_locale=None, prefill=True):
@@ -24,6 +28,9 @@ def write_catalog_workbook(outfp, catalog, languages=None, source_locale=None, p
     for message in catalog:
         original = message.id
         if not original:
+            continue
+        if isinstance(original, tuple):
+            log.warning('Unable to represent plural message %s in Excel catalog', message)
             continue
         row = [original]
         if prefill:
