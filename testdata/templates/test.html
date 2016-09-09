@@ -1,2 +1,11 @@
 {% blocktrans %}Hello, world{% endblocktrans %}
 {% trans "Terve, maailma" %}
+
+{% blocktrans %}Hello, {{ name }}{% endblocktrans %}
+{% trans "warewolf" context "a canine selling goods" %}
+{% blocktrans count counter=list|length trimmed %}
+I have a thing.
+{% plural %}
+I have {{ counter }} things.
+{% endblocktrans %}
+

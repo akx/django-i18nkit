@@ -20,4 +20,4 @@ def test_export_command(settings, tmpdir):
     )
     ws = openpyxl.load_workbook(xlsx_filename)
     rows = [[c.value for c in row] for row in list(ws)[0]]
-    assert len(rows) == 5
+    assert len(rows) == 7

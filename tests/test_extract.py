@@ -12,7 +12,7 @@ def test_extract_command(tmpdir):
         output=filename,
     )
     with open(filename, 'rb') as infp:
-        assert len(read_po(infp)) == 4
+        assert len(read_po(infp)) == 7
 
 
 def test_extract_apps(tmpdir):
@@ -24,4 +24,4 @@ def test_extract_apps(tmpdir):
         verbosity=2,
     )
     with open(filename, 'rb') as infp:
-        assert len(read_po(infp)) == 4
+        assert len(read_po(infp)) == 7
