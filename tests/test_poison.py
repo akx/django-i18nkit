@@ -51,3 +51,13 @@ def test_poisoned_strings_remain_formattable(format_string, formattee):
             assert poisoned_format_string.format(**formattee)
         else:
             assert poisoned_format_string.format(*formattee)
+
+
+@pytest.mark.parametrize('enabled', (False, True))
+def test_poisoned_django_template(enabled):
+    from django.template.base import Template, Context
+    with poison.override(enabled):
+        template = Template("{% load i18n %}{% blocktrans %}Hello, {{ name }}!{% endblocktrans %}")
+        rendered = template.render(Context({'name': 'world'}))
+        assert ("Hello," in rendered) != enabled  # Text should be mangled,
+        assert 'world' in rendered  # but variables should remain
