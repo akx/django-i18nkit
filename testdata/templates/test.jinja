@@ -2,3 +2,12 @@
 
 {# this will break the fallback configuration, as the `break` tag isn't available #}
 {% for x in [] %}{% break %}{% endfor %}
+
+{% trans count=list|length -%}
+There is {{ count }} {{ name }} object.
+{%- pluralize -%}
+There are {{ count }} {{ name }} objects.
+{%- endtrans %}
+
+{{ gettext('Hey %(name)s!', name='you') }}
+{{ ngettext('%(num)d donger', '%(num)d dongers', 8) }}

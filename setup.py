@@ -19,7 +19,13 @@ setup(
     ],
     install_requires=[
         'babel<3.0',
-        'Django>=1.8,<1.10',
-        'django_babel>=0.5.0',
-    ]
+        'Django>=1.8',
+    ],
+    entry_points={
+        'babel.extractors': [
+            'ik_django = i18nkit.django_extract:django_extract',
+            'ik_jinja2 = i18nkit.jinja2_extract:jinja2_extract',
+
+        ]
+    }
 )

@@ -1,5 +1,6 @@
 import openpyxl
 from django.core.management import call_command
+from tests.consts import EXPECTED_REGULAR_MESSAGES
 
 from tests.utils import repo_root
 
@@ -20,4 +21,7 @@ def test_export_command(settings, tmpdir):
     )
     ws = openpyxl.load_workbook(xlsx_filename)
     rows = [[c.value for c in row] for row in list(ws)[0]]
-    assert len(rows) == 5
+    assert len(rows) == (
+        1 +  # Header
+        EXPECTED_REGULAR_MESSAGES
+    )
