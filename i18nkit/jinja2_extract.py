@@ -5,6 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 log = logging.getLogger(__name__)
 
+
 def django_jinja2_extract(fileobj, keywords, comment_tags, options):
     from jinja2.ext import _CommentFinder, extract_from_ast
     # Use the Django-Jinja2 -configured Jinja2 environment for extraction.

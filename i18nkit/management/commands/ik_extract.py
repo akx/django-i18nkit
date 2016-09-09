@@ -4,6 +4,7 @@ from babel.messages import Catalog
 from babel.messages.extract import check_and_call_extract_file, DEFAULT_KEYWORDS
 from babel.messages.pofile import write_po
 from django.core.management import BaseCommand
+
 from i18nkit.django_extract import django_extract
 from i18nkit.jinja2_extract import jinja2_extract
 from i18nkit.utils import add_paths_options, DirectoryFilter, get_paths
