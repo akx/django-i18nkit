@@ -2,7 +2,7 @@ import logging
 
 from babel.messages import Catalog
 from django.conf import settings
-from django.utils import translation
+from django.utils.translation.trans_real import translation as get_translation
 
 from i18nkit.utils import raise_if_no_module
 
@@ -23,7 +23,8 @@ def write_catalog_workbook(outfp, catalog, languages=None, source_locale=None, p
 
     workbook = openpyxl.Workbook()
     sheet = workbook.active
-    target_locales = sorted([lc for (lc, name) in languages if lc != source_locale])
+    target_locales = list(sorted([lc for (lc, name) in languages if lc != source_locale]))
+    target_catalogs = {lc: get_translation(lc) for lc in target_locales}
     sheet.append([source_locale] + target_locales)
     for message in catalog:
         original = message.id
@@ -35,9 +36,8 @@ def write_catalog_workbook(outfp, catalog, languages=None, source_locale=None, p
         row = [original]
         if prefill:
             for locale in target_locales:
-                with translation.override(locale):
-                    translated = translation.gettext(original)
-                    row.append((translated if (translated != original) else ''))
+                translated = target_catalogs[locale]._catalog.get(original)
+                row.append(translated or '')
         sheet.append(row)
     workbook.save(outfp)
 
