@@ -17,6 +17,6 @@ class Command(BaseCommand):
         if output.endswith('xlsx'):
             with open(output, 'wb') as outfp:
                 write_catalog_workbook(outfp, merged_catalog)
-                self.stdout.write('Wrote: %s' % outfp.name)
+                self.stdout.write(f'Wrote: {outfp.name}')
         else:  # pragma: no cover
-            raise ValueError('unknown output type: %s' % output)
+            raise ValueError(f'unknown output type: {output}')

@@ -22,7 +22,7 @@ class Command(BaseCommand):
             with open(input, 'rb') as infp:
                 catalogs = read_catalog_workbook(infp)
         else:  # pragma: no cover
-            raise ValueError('unknown input type: %s' % input)
+            raise ValueError(f'unknown input type: {input}')
 
         for locale, update_catalog in sorted(catalogs.items()):
             if locale == source_language:
@@ -59,6 +59,6 @@ class Command(BaseCommand):
             # and write things out
             with open(output_filename, 'wb') as outfp:
                 write_po(outfp, catalog, width=0, sort_output=True, omit_header=True)
-            self.stdout.write('Wrote %d entries in %s to %s' % (len(catalog), catalog.locale, output_filename))
+            self.stdout.write(f'Wrote {len(catalog):d} entries in {catalog.locale} to {output_filename}')
         else:
-            self.stdout.write('Would have written %d entries in %s' % (len(catalog), catalog.locale))
+            self.stdout.write(f'Would have written {len(catalog):d} entries in {catalog.locale}')

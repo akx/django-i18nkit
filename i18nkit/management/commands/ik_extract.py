@@ -21,8 +21,8 @@ OPTIONS_MAP = {
 }
 
 KEYWORDS = dict(DEFAULT_KEYWORDS.copy())
-for kw in set(kw for kw in KEYWORDS if kw.isalpha()):
-    KEYWORDS['%s_lazy' % kw] = KEYWORDS[kw]
+for kw in {kw for kw in KEYWORDS if kw.isalpha()}:
+    KEYWORDS[f'{kw}_lazy'] = KEYWORDS[kw]
 
 
 def extract_from_dir(dirname, method_map, options_map, keywords, dirname_filter=None, status_callback=None):
@@ -35,7 +35,7 @@ def extract_from_dir(dirname, method_map, options_map, keywords, dirname_filter=
         for filename in filenames:
             filepath = os.path.join(root, filename).replace(os.sep, '/')
 
-            for message_tuple in check_and_call_extract_file(
+            yield from check_and_call_extract_file(
                 filepath,
                 method_map=method_map,
                 options_map=options_map,
@@ -44,8 +44,7 @@ def extract_from_dir(dirname, method_map, options_map, keywords, dirname_filter=
                 dirpath=absname,
                 comment_tags=(),
                 strip_comment_tags=False,
-            ):
-                yield message_tuple
+            )
 
 
 class Command(BaseCommand):
@@ -80,7 +79,7 @@ class Command(BaseCommand):
         if not output_path:
             self.stdout.write('would write POT with %d entries, but no `-o` given' % len(catalog))
             return
-        self.stdout.write('writing POT with %d entries to %s' % (len(catalog), output_path))
+        self.stdout.write(f'writing POT with {len(catalog):d} entries to {output_path}')
         with open(output_path, 'wb') as outfile:
             write_po(
                 outfile,
@@ -94,7 +93,7 @@ class Command(BaseCommand):
         catalog = Catalog(charset='UTF-8')
         for path in sorted(paths):
             if self.config['verbosity'] > 1:
-                self.stdout.write('processing %s' % path)
+                self.stdout.write(f'processing {path}')
             extracted = extract_from_dir(
                 path,
                 method_map=METHOD_MAP,
@@ -114,4 +113,4 @@ class Command(BaseCommand):
 
     def status_callback(self, filename, method, options):
         if self.config['verbosity'] > 2:
-            self.stdout.write('... %s: %s (%s)' % (filename, method, options))
+            self.stdout.write(f'... {filename}: {method} ({options})')
