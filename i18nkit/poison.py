@@ -1,9 +1,8 @@
 import re
 from contextlib import contextmanager
+from functools import lru_cache
 
 from django.utils import translation
-from django.utils.lru_cache import lru_cache
-from django.utils.six import unichr
 
 _original_trans = translation._trans
 
@@ -44,7 +43,7 @@ def poison_string(string):
 
     def _memoize_format(m):
         format_memo.append(m.group(0))
-        return '\u0001%s\u0002' % unichr(0xE000 + len(format_memo))
+        return '\u0001%s\u0002' % chr(0xE000 + len(format_memo))
 
     def _unmemoize_format(m):
         return format_memo[ord(m.group(1)) - 0xE000 - 1]
