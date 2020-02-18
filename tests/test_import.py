@@ -1,9 +1,9 @@
 import os
 
-import pytest
 from babel.messages.pofile import read_po
 from django.core.management import call_command
 
+import pytest
 from tests.utils import repo_root
 
 

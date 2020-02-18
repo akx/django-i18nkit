@@ -1,7 +1,7 @@
-import openpyxl
 from django.core.management import call_command
-from tests.consts import EXPECTED_REGULAR_MESSAGES
 
+import openpyxl
+from tests.consts import EXPECTED_REGULAR_MESSAGES
 from tests.utils import repo_root
 
 

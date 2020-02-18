@@ -1,7 +1,7 @@
-import pytest
 from django.utils import translation
 from django.utils.translation import npgettext, pgettext
 
+import pytest
 from i18nkit import poison
 
 
