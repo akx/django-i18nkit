@@ -41,7 +41,7 @@ class Command(BaseCommand):
                 self.process_file(os.path.join(dirpath, file))
 
     def process_file(self, file):
-        outfile = '%s.mo' % os.path.splitext(file)[0]
+        outfile = f'{os.path.splitext(file)[0]}.mo'
         try:
             with open(file, 'rb') as infp:
                 catalog = read_po(infp)
@@ -50,6 +50,6 @@ class Command(BaseCommand):
             with open(outfile, 'wb') as outfp:
                 outfp.write(out_bio.getvalue())
         except Exception as exc:  # pragma: no cover
-            self.stderr.write('could not process %s: %s' % (file, exc))
+            self.stderr.write(f'could not process {file}: {exc}')
         else:
-            self.stdout.write('compiled %s -> %s' % (file, outfile))
+            self.stdout.write(f'compiled {file} -> {outfile}')

@@ -37,7 +37,7 @@ def write_catalog_workbook(outfp, catalog, languages=None, source_locale=None, p
             for locale in target_locales:
                 with translation.override(locale):
                     translated = translation.gettext(original)
-                    row.append((translated if (translated != original) else ''))
+                    row.append(translated if (translated != original) else '')
         sheet.append(row)
     workbook.save(outfp)
 

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import re
 from contextlib import contextmanager
 
@@ -58,7 +56,7 @@ def poison_string(string):
     return string
 
 
-class PoisonTrans(object):
+class PoisonTrans:
     def __getattr__(self, real_name):
         return getattr(_original_trans, real_name)
 

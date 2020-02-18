@@ -53,7 +53,7 @@ def get_paths(apps=(), dirs=(), dir_children=(), all_apps=False, dirname_filter=
             if all_apps or app_config.name in apps:
                 paths.add(os.path.realpath(app_config.path))
 
-    paths.update(set(os.path.realpath(dir) for dir in dirs))
+    paths.update({os.path.realpath(dir) for dir in dirs})
 
     for parent_dir in dir_children:
         parent_dir = os.path.realpath(parent_dir)
@@ -81,10 +81,10 @@ def raise_if_no_module(module):
     try:
         import_module(module)
     except ImportError:  # pragma: no cover
-        raise ImproperlyConfigured("`%s` is required for this functionality" % module)
+        raise ImproperlyConfigured(f"`{module}` is required for this functionality")
 
 
-class DirectoryFilter(object):
+class DirectoryFilter:
     def __init__(self, ignore_dirs=(), default_ignore_dirs=True):
         self.ignore_dirs = ignore_dirs
         self.default_ignore_dirs = default_ignore_dirs
