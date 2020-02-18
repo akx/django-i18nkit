@@ -1,9 +1,9 @@
 import os
+from io import BytesIO
 
 from babel.messages.mofile import write_mo
 from babel.messages.pofile import read_po
 from django.core.management import BaseCommand
-from django.utils.six import BytesIO
 
 from i18nkit.utils import add_paths_options, DirectoryFilter, get_paths
 
