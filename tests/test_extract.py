@@ -1,7 +1,7 @@
 from babel.messages.pofile import read_po
 from django.core.management import call_command
-from tests.consts import EXPECTED_REGULAR_MESSAGES, EXPECTED_PLURAL_MESSAGES
 
+from tests.consts import EXPECTED_PLURAL_MESSAGES, EXPECTED_REGULAR_MESSAGES
 from tests.utils import repo_root
 
 
