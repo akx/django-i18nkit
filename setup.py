@@ -19,7 +19,7 @@ setup(
     ],
     install_requires=[
         'babel<3.0',
-        'Django>=1.8',
+        'Django>=2.0,<4.0',
     ],
     entry_points={
         'babel.extractors': [
